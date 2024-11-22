@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeiro AR</title>
+    <!-- A-Frame itself -->
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/3.4.5/aframe/build/aframe-ar.js'></script>
+</head>
+<body style="margin:0px; overflow:hidden;">
+    <a-scene vr-mode-ui="enabled: false" arjs="debugUIEnabled:false">
+
+        <a-assets>
+            <img id="img" src="./assets/shieldmaga.png" />
+            <audio id="som" preload="auto" src="./assets/avengers_.mp3"></audio>
+        </a-assets>
+
+        <a-marker preset="hiro" id="marcador">
+            <a-image id="escudo" src="#img" position="0 0 0" scale="1 1 1"></a-image>
+            <a-entity sound="src: #som; autoplay: true; loop: true;"></a-entity>
+        </a-marker>
+
+        <a-entity camera></a-entity>
+    </a-scene>
+
+    <script>
+        AFRAME.registerComponent('sync-rotation', {
+            schema: { target: { type: 'selector' } },
+            init: function () {
+                this.target = this.data.target; // O elemento que será girado
+            },
+            tick: function () {
+                const markerRotation = this.el.object3D.rotation; // Rotação do marcador
+                if (this.target) {
+                    // Sincroniza a rotação do elemento com o marcador
+                    this.target.object3D.rotation.set(markerRotation.x, markerRotation.y, markerRotation.z);
+                }
+            }
+        });
+
+        // Aplica o componente no marcador
+        document.querySelector('#marcador').setAttribute('sync-rotation', 'target: #escudo');
+    </script>
+</body>
+</html>

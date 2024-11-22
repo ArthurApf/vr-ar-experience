@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tour Inteli</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Assets utilizados no projeto -->
+      <a-assets>
+        <img id="imgSala" src="./assets/sala.jpg" />
+      </a-assets>
+      
+      <!-- Camera + Cursor -->
+      <a-camera position="0 1 0" id="cameraCena">
+        <a-cursor></a-cursor>
+      </a-camera>
+
+      <!-- Ambiente -->
+      <a-sky id="img-360" radius="30" src="#imgSala"></a-sky>
+      <a-text value="Sala" position="-1.5 4 -5" color="#000" scale="1.5 1.5 1.5"></a-text>
+      <a-text value="Volte para Escada" position="-1.5 3.5 -5" color="#000"></a-text>
+
+      <!-- Objeto interativo -->
+      <a-sphere 
+        id="voltar" 
+        position="-8 10 -26" 
+        radius="0.5" 
+        color="#ed1212" 
+        event-set__mouseenter="_event: mouseenter; color: #00ff00" 
+        event-set__mouseleave="_event: mouseleave; color: #ed1212">
+      </a-sphere>
+    </a-scene>
+
+    <!-- Script para lidar com a transição -->
+    <script>
+      document.querySelector("#voltar")
+        .addEventListener("click", () => {
+          window.location.href = "vr2.html";
+        });
+    </script>
+  </body>
+</html>

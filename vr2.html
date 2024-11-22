@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tour Inteli</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Assets utilizados no projeto -->
+      <a-assets>
+        <img id="imgEscada" src="./assets/escada.jpeg" />
+      </a-assets>
+      
+      <!-- Camera + Cursor -->
+      <a-camera position="0 1 0" id="cameraCena">
+        <a-cursor></a-cursor>
+      </a-camera>
+
+      <!-- Ambiente -->
+      <a-sky id="img-360" radius="30" src="#imgEscada"></a-sky>
+      <a-text value="Escada Principal" position="-1.5 4 -5" color="#000" scale="1.5 1.5 1.5"></a-text>
+      <a-text value="Volte para fora" position="-1.5 3.5 -5" color="#000"></a-text>
+
+      <!-- Objetos interativos -->
+      <a-sphere 
+        id="voltar" 
+        position="-8 10 -26" 
+        radius="0.5" 
+        color="#ed1212" 
+        event-set__mouseenter="_event: mouseenter; color: #00ff00" 
+        event-set__mouseleave="_event: mouseleave; color: #ed1212">
+      </a-sphere>
+      <a-text value="Ir para sala" position="8 9 -20" color="#000" scale="1.2 1.2 1.2"></a-text>
+      <a-sphere 
+        id="ir" 
+        position="8 10 -20" 
+        radius="0.5" 
+        color="#1212ed" 
+        event-set__mouseenter="_event: mouseenter; color: #00ff00" 
+        event-set__mouseleave="_event: mouseleave; color: #1212ed">
+      </a-sphere>
+    </a-scene>
+
+    <!-- Script para lidar com a transição -->
+    <script>
+      document.querySelector("#voltar")
+        .addEventListener("click", () => {
+          window.location.href = "vr.html";
+        });
+
+      document.querySelector("#ir")
+        .addEventListener("click", () => {
+          window.location.href = "vr3.html";
+        });
+    </script>
+  </body>
+</html>
